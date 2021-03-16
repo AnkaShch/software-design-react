@@ -13,7 +13,7 @@ import rx.functions.Func2
 import java.util.concurrent.TimeUnit
 
 class ReactiveMongoDriver {
-    private val mongoClient: MongoClient = MongoClients.create("mongodb://localhost:27017")
+    private val mongoClient: MongoClient = MongoClients.create()
     fun addUser(user: User): Success {
         return mongoClient.getDatabase(DATABASE_NAME).getCollection("users")
             .insertOne(user.toDocument()).timeout(10, TimeUnit.SECONDS).toBlocking().single()
